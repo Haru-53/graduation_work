@@ -95,4 +95,4 @@ FullCalendar for カレンダー
 ★インフラ
 Heroku (初期デプロイ)
 AWS S3 (ファイル保存用)
-SendGrid (メール送信)
+SendGrid (メール送信) 
