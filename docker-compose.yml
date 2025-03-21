@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  web:
+    build: .  # Dockerfile が存在するディレクトリを指定（通常は docker-compose.yml と同じディレクトリ）
+    command: bundle exec puma -C config/puma.rb  # コンテナ起動時に実行するコマンド
+    ports:
+      - "3001:3000"  # ホストマシンのポート 3000 をコンテナのポート 3000 にマッピング
+    volumes:
+      - .:/app  # ホストマシンの現在のディレクトリをコンテナ内の /app にマウント（開発時のコード変更を即座に反映）
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: "postgresql://postgres:password@db:5432" # データベース接続情報
+      SECRET_KEY_BASE: <your_secret_key_base> # Rails の secret_key_base を設定
+    depends_on:
+      - db  # web サービスは db サービスが起動してから起動
+  db:
+    image: postgres:13  # 使用する Docker イメージ
+    volumes:
+      - db_data:/var/lib/postgresql/data  # データベースのデータを永続化するためのボリューム
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+volumes:
+  db_data:
+  
