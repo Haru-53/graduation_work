@@ -1,0 +1,14 @@
+<header>
+  <div class="header-container">
+    <%# 一つ前に戻るボタン %>
+    <% if request.referer.present? && request.referer != request.url %>
+      <%= link_to '← 戻る', :back, class: 'back-button' %>
+    <% end %>
+
+    <%# トップページに戻るボタン %>
+    <%= link_to 'ホーム', root_path, class: 'home-button' %>
+
+    <%# その他のヘッダー要素（例：サイト名、ロゴなど） %>
+    <h1><%= Rails.application.config.application_name %></h1>
+  </div>
+</header>
