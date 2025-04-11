@@ -1,34 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>MentalManageDiary</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
-</html>
-<!DOCTYPE html>
-<html>
 <head>
-  <title><%= yield(:title) || Rails.application.config.application_name %></title>
+  <title><%= yield(:title) || "MentalManageDiary" %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
 </head>
-
 <body>
-  <%= render 'layouts/header' %>  <%# ヘッダーのパーシャルをレンダリング %>
-
+  <%= render 'layouts/header' %> <%# ヘッダーのパーシャルをレンダリング %>
+  
   <div class="container">
-    <%= yield %>  <%# 各ビューの内容がここに表示される %>
+    <%= yield %> <%# 各ビューの内容がここに表示される %>
   </div>
-
-  <%= render 'layouts/footer' %>  <%# フッターのパーシャルをレンダリング %>
+  
+  <%= render 'layouts/footer' %> <%# フッターのパーシャルをレンダリング %>
 </body>
 </html>
