@@ -1,9 +1,6 @@
 <header>
   <div class="header-container">
-    <%# 一つ前に戻るボタン %>
-    <% if request.referer.present? && request.referer != request.url %>
-      <%= link_to '← 戻る', :back, class: 'back-button' %>
-    <% end %>
+    <%= link_to "戻る", "#", onclick: "history.back(); return false;", method: :get %>
 
     <%# トップページに戻るボタン %>
     <%= link_to 'ホーム', root_path, class: 'home-button' %>
