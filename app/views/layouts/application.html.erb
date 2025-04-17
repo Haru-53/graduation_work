@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <%= render 'layouts/header' %> <%# ヘッダーのパーシャルをレンダリング %>
+
   <title><%= yield(:title) || "MentalManageDiary" %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
@@ -8,14 +9,14 @@
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
-</head>
 <body>
-  <%= render 'layouts/header' %> <%# ヘッダーのパーシャルをレンダリング %>
+
   
   <div class="container">
     <%= yield %> <%# 各ビューの内容がここに表示される %>
   </div>
   
-  <%= render 'layouts/footer' %> <%# フッターのパーシャルをレンダリング %>
+
 </body>
+  <%= render 'layouts/footer' %> <%# フッターのパーシャルをレンダリング %>
 </html>
