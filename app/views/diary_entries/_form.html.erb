@@ -1,0 +1,50 @@
+<%= form_with(model: diary_entry, local: true) do |form| %>
+  <% if diary_entry.errors.any? %>
+    <div class="error-messages">
+      <h3><%= pluralize(diary_entry.errors.count, "error") %> が発生しました:</h3>
+      <ul>
+        <% diary_entry.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :date, '日付' %>
+    <%= form.date_field :date %>
+  </div>
+
+  <fieldset class="positive-points">
+    <legend>今日の良かったこと3つ</legend>
+    
+    <div class="field">
+      <%= form.label :positive_point1, '良かったこと 1' %>
+      <%= form.text_area :positive_point1, rows: 3 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :positive_point2, '良かったこと 2' %>
+      <%= form.text_area :positive_point2, rows: 3 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :positive_point3, '良かったこと 3' %>
+      <%= form.text_area :positive_point3, rows: 3 %>
+    </div>
+  </fieldset>
+
+  <div class="field">
+    <%= form.label :reflection_point, '今日の反省点' %>
+    <%= form.text_area :reflection_point, rows: 4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :memo, 'メモ' %>
+    <%= form.text_area :memo, rows: 5 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '保存する', class: 'button primary' %>
+  </div>
+<% end %>

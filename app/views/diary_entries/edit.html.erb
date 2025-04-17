@@ -1,0 +1,10 @@
+<h1>DiaryEntries#edit</h1>
+<p>Find me in app/views/diary_entries/edit.html.erb</p>
+<h1><%= @diary_entry.date.strftime('%Y年%m月%d日') %>の日記を編集</h1>
+
+<%= render 'form', diary_entry: @diary_entry %>
+
+<div class="actions">
+  <%= link_to '詳細', @diary_entry, class: 'button' %>
+  <%= link_to '戻る', diary_entries_path, class: 'button secondary' %>
+</div>

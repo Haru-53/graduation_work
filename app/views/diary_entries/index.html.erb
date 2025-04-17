@@ -1,0 +1,35 @@
+<h1>DiaryEntries#index</h1>
+<p>Find me in app/views/diary_entries/index.html.erb</p>
+
+<h1>日記一覧</h1>
+
+<div class="diary-entries-container">
+  <div class="actions">
+    <%= link_to '新しい日記を書く', new_diary_entry_path, class: 'button' %>
+  </div>
+
+  <% if @diary_entries.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @diary_entries.each do |entry| %>
+          <tr>
+            <td><%= link_to entry.date.strftime('%Y年%m月%d日'), entry %></td>
+            <td>
+              <%= link_to '詳細', entry %>
+              <%= link_to '編集', edit_diary_entry_path(entry) %>
+              <%= link_to '削除', entry, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>まだ日記がありません。新しい日記を書いてみましょう！</p>
+  <% end %>
+</div>

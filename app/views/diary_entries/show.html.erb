@@ -1,0 +1,29 @@
+<h1>DiaryEntries#show</h1>
+<p>Find me in app/views/diary_entries/show.html.erb</p>
+<h1><%= @diary_entry.date.strftime('%Y年%m月%d日') %>の日記</h1>
+
+<div class="diary-entry">
+  <section class="positive-points">
+    <h2>今日の良かったこと3つ</h2>
+    <ol>
+      <li><%= @diary_entry.positive_point1 %></li>
+      <li><%= @diary_entry.positive_point2 %></li>
+      <li><%= @diary_entry.positive_point3 %></li>
+    </ol>
+  </section>
+
+  <section class="reflection-point">
+    <h2>今日の反省点</h2>
+    <p><%= @diary_entry.reflection_point %></p>
+  </section>
+
+  <section class="memo">
+    <h2>メモ</h2>
+    <p><%= @diary_entry.memo %></p>
+  </section>
+
+  <div class="actions">
+    <%= link_to '編集', edit_diary_entry_path(@diary_entry), class: 'button' %>
+    <%= link_to '戻る', diary_entries_path, class: 'button secondary' %>
+  </div>
+</div>
