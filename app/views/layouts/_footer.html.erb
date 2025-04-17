@@ -1,20 +1,20 @@
 <footer>
   <div class="footer-container">
-    <%# 著作権表示 %>
-    <p class="copyright">&copy; <%= Time.current.year %> <%= Rails.application.config.application_name %> All rights reserved.</p>
-
-    <%# お知らせ %>
+   
+    <%# ★お知らせ★ %>
     <div class="notice">
       <h3>お知らせ</h3>
       <ul
         <li><%= link_to '新機能のリリース情報', '#' %></li>
       </ul>
     </div>
-
     <%# 更新情報 %>
     <div class="updates">
-      <h3>更新情報</h3>
       <p>最終更新日: <%= l Time.current, format: :long %></p>
+
     </div>
+     <%# 著作権表示 %>
+    <p class="copyright">&copy; <%= Time.current.year %> <%= Rails.application.config.application_name %> All rights reserved.</p>
+
   </div>
 </footer>

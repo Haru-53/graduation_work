@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <%= render 'layouts/header' %> <%# ヘッダーのパーシャルをレンダリング %>
+  <head>
+    <title><%= yield(:title) || "MentalManageDiary" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
 
-  <title><%= yield(:title) || "MentalManageDiary" %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+  <body>
+    <%= render 'layouts/header' %>
 
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
-<body>
+    <div class="container">
+      <%= yield %>
+    </div>
 
-  
-  <div class="container">
-    <%= yield %> <%# 各ビューの内容がここに表示される %>
-  </div>
-  
-
-</body>
-  <%= render 'layouts/footer' %> <%# フッターのパーシャルをレンダリング %>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>

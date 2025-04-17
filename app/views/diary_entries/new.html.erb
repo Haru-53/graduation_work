@@ -1,0 +1,9 @@
+<h1>DiaryEntries#new</h1>
+<p>Find me in app/views/diary_entries/new.html.erb</p>
+<h1>新しい日記を書く</h1>
+
+<%= render 'form', diary_entry: @diary_entry %>
+
+<div class="actions">
+  <%= link_to '戻る', diary_entries_path, class: 'button secondary' %>
+</div>
