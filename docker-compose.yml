@@ -4,7 +4,7 @@ services:
     build: .  # Dockerfile が存在するディレクトリを指定（通常は docker-compose.yml と同じディレクトリ）
     command: bundle exec puma -C config/puma.rb  # コンテナ起動時に実行するコマンド
     ports:
-      - "3001:3000"  # ホストマシンのポート 3000 をコンテナのポート 3000 にマッピング
+      - "3000:3000"  # ホストマシンのポート 3000 をコンテナのポート 3000 にマッピング
     volumes:
       - .:/app  # ホストマシンの現在のディレクトリをコンテナ内の /app にマウント（開発時のコード変更を即座に反映）
     environment:

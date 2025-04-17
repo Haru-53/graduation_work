@@ -1,62 +1,53 @@
 # syntax = docker/dockerfile:1
-
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.0.2
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+
+# Install common dependencies
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    build-essential \
+    git \
+    curl \
+    libpq-dev \
+    nodejs \
+    yarn && \
+    rm -rf /var/lib/apt/lists/*
 
 # Rails app lives here
 WORKDIR /rails
 
-# Set production environment
-ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+# Create rails user and group for application ownership
+RUN groupadd -r rails
+RUN useradd -m -d /rails -u 1000 -g rails rails
 
+# Install gems needed for building assets (in a separate stage to cache)
+FROM base as builder
+WORKDIR /rails
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+# Install correct bundler version
+RUN gem install bundler:2.5.23
 
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config
-RUN chown -R rails:rails /usr/local/bundle
-# Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
+RUN bundle install --jobs=4 --retry=3
 
-# Copy application code
+# Precompile assets
 COPY . .
-
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
-
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
+COPY package.json yarn.lock ./
+RUN bundle exec rails assets:precompile
 
 # Final stage for app image
 FROM base
+WORKDIR /rails
+COPY --from=builder /rails /rails
+COPY --from=builder /usr/local/bundle /usr/local/bundle
 
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+# Set ownership for important directories
+RUN chown -R rails:rails /rails
 
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
-
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+# Switch to non-root user
 USER rails:rails
 
-# Entrypoint prepares the database.
+# Entrypoint prepares the database and starts the server
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]

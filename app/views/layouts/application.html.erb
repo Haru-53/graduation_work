@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>MentalManageDiary</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title><%= yield(:title) || "MentalManageDiary" %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+  <%= render 'layouts/header' %> <%# ヘッダーのパーシャルをレンダリング %>
+  
+  <div class="container">
+    <%= yield %> <%# 各ビューの内容がここに表示される %>
+  </div>
+  
+  <%= render 'layouts/footer' %> <%# フッターのパーシャルをレンダリング %>
+</body>
 </html>

@@ -1,0 +1,20 @@
+<!-- app/views/top/index.html.erb -->
+<div class="top-container">
+  <hr class="separator">
+
+  <h1><%= t('mental_manage_diary') %></h1>
+  <%= image_tag 'top_image.jpg', alt: 'トップイメージ', class: 'top-image' %>
+
+  <div class="auth-buttons">
+    <%= link_to t('.login'), new_user_session_path, class: 'login-button' %>
+    <%= link_to t('.sign_up'), new_user_registration_path, class: 'signup-button' %>
+  </div>
+
+  <%= link_to t('.try_it'), '#', class: 'try-button' %>
+  <%= link_to t('.explanation_app'), explanation_path, class: 'explanation-button' %>
+  <%= link_to 'ログイン', login_path %>
+</div>
+
+<div class="explanation-container">
+
+</div>
