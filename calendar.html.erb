@@ -1,0 +1,14 @@
+<!-- app/views/diary_entries/calendar.html.erb -->
+<h1>日記カレンダー</h1>
+
+<%= month_calendar(events: @diary_entries) do |date, entries| %>
+  <div class="day">
+    <div><strong><%= date.day %></strong></div>
+
+    <% if entries.any? %>
+      ✅ <%= link_to '日記を見る', diary_entry_path(entries.first) %>
+    <% else %>
+      <%= link_to '日記を書く', new_diary_entry_path(date: date), class: 'new-entry' %>
+    <% end %>
+  </div>
+<% end %>

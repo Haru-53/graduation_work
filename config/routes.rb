@@ -1,20 +1,25 @@
 Rails.application.routes.draw do
-  get 'diary_entries/index'
-  get 'diary_entries/show'
-  get 'diary_entries/new'
-  get 'diary_entries/create'
-  get 'diary_entries/edit'
-  get 'diary_entries/update'
-  get 'diary_entries/destroy'
   devise_for :users
-  
-  root 'top#index'
 
-  get '/explanation', to: 'static_pages#explanation', as: 'explanation' # ①解説ページ
-  get '/sample', to: 'static_pages#sample', as: 'sample'                # ②サンプルページ
-  get '/login', to: 'users/sessions#new', as: 'login'                   # ③ログインページ
-  get '/signup', to: 'users/registrations#new', as: 'signup'            # ④新規登録ページ
+  # 固定ページ系
+  root 'top#index'  # ← 最初に表示するページ
+  get '/explanation', to: 'static_pages#explanation', as: 'explanation'
+  get '/sample', to: 'static_pages#sample', as: 'sample'
+  get '/login', to: 'users/sessions#new', as: 'login'
+  get '/signup', to: 'users/registrations#new', as: 'signup'
 
-  root 'diary_entries#index'
-  resources :diary_entries
+  # 日記のメイン機能
+  resources :diary_entries do
+    collection do
+      get :calendar        # カレンダーページ
+      get :summary         # 要約ページ
+    end
+  end
+
+  # 幸福度関連
+  resources :happiness_scores do
+    collection do
+      get :stats
+    end
+  end
 end

@@ -1,0 +1,15 @@
+<h1>日記の要約（<%= @period.gsub('_', ' ') %>）</h1>
+
+<%= form_with url: summary_diary_entries_path, method: :get, local: true do %>
+  <label>期間を選択：</label>
+  <%= select_tag :period, options_for_select([["1週間", "1_week"], ["1か月", "1_month"], ["3か月", "3_months"], ["半年", "6_months"], ["1年", "1_year"]], @period), onchange: "this.form.submit();" %>
+<% end %>
+
+<ul>
+  <% @summaries.each do |summary| %>
+    <li>
+      <strong><%= summary[:date].strftime('%Y年%m月%d日') %></strong><br>
+      <p><%= summary[:summary] %></p>
+    </li>
+  <% end %>
+</ul>

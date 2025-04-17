@@ -1,0 +1,35 @@
+<h1>幸福度の統計</h1>
+
+<div class="period-selector">
+  <%= link_to '1週間', happiness_scores_stats_path(period: 'week') %> |
+  <%= link_to '1ヶ月', happiness_scores_stats_path(period: 'month') %> |
+  <%= link_to '3ヶ月', happiness_scores_stats_path(period: '3months') %> |
+  <%= link_to '半年', happiness_scores_stats_path(period: '6months') %>
+</div>
+
+<h2>統計情報</h2>
+<ul>
+  <li><strong>平均：</strong><%= @average || 'データなし' %> %</li>
+  <li><strong>最大：</strong><%= @max || 'データなし' %> %</li>
+  <li><strong>最小：</strong><%= @min || 'データなし' %> %</li>
+</ul>
+
+<h2>幸福度の推移</h2>
+<%= line_chart @chart_data.map { |d| [d[:date], d[:score]] }, xtitle: "日付", ytitle: "幸福度（%）", points: true, height: "300px" %>
+
+<%= line_chart @chart_data.map { |d| [d[:date], d[:score]] },
+  xtitle: "日付",
+  ytitle: "幸福度（％）",
+  library: {
+    tooltips: {
+      callbacks: {
+        label: %|function(tooltipItem, data) {
+          let index = tooltipItem.dataIndex;
+          let value = tooltipItem.yLabel;
+          let memo = #{ @chart_data.to_json }[index].memo;
+          return "幸福度: " + value + "%\\nメモ: " + memo;
+        }|
+      }
+    }
+  }
+%>

@@ -1,0 +1,12 @@
+<h2>幸福度チェック</h2>
+
+<%= form_with(model: [ @diary_entry, @happiness_score || @diary_entry.build_happiness_score ]) do |f| %>
+  <% (1..10).each do |i| %>
+    <div>
+      <%= label_tag "item#{i}", "項目#{i}" %>
+      <%= number_field_tag "happiness_score[item#{i}]", @happiness_score&.send("item#{i}") || 0, min: 0, max: 10 %>
+    </div>
+  <% end %>
+
+  <%= f.submit '保存' %>
+<% end %>

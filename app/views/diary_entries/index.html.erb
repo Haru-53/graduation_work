@@ -1,13 +1,23 @@
-<h1>DiaryEntries#index</h1>
-<p>Find me in app/views/diary_entries/index.html.erb</p>
-
 <h1>日記一覧</h1>
 
 <div class="diary-entries-container">
+  <!-- 🔍 検索フォーム -->
+  <div class="search-form">
+    <%= form_with url: diary_entries_path, method: :get, local: true do %>
+      <div>
+        <%= label_tag :keyword, "キーワード検索" %>
+        <%= text_field_tag :keyword, params[:keyword], placeholder: "例：うれしい、反省、カフェ" %>
+        <%= submit_tag "検索", class: "button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- ➕ 新規作成ボタン -->
   <div class="actions">
     <%= link_to '新しい日記を書く', new_diary_entry_path, class: 'button' %>
   </div>
 
+  <!-- 📋 一覧表示 -->
   <% if @diary_entries.any? %>
     <table>
       <thead>
