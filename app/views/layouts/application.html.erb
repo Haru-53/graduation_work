@@ -15,7 +15,8 @@
     <div class="container">
       <%= yield %>
     </div>
-  <%= link_to 'カレンダー', calendar_diary_entries_path %> |
-    <%= render 'layouts/footer' %>
+
+    <% unless controller_name == 'home' && action_name == 'index' %>
+      <%= render 'layouts/footer' %>
+    <% end %>
   </body>
-</html>
