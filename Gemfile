@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.2.2"
+ruby "3.0.2"
 
 gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 gem "puma", ">= 5.0"
@@ -23,8 +23,6 @@ group :development do
   # gem "rack-mini-profiler"
   # gem "spring"
 end
-
-gem 'simple_calendar'
 
 group :test do
   gem "capybara"
