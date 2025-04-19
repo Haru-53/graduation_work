@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1
 ARG RUBY_VERSION=3.2.2
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM ruby:$RUBY_VERSION-slim as base
 
 # Install common dependencies
 RUN apt-get update -qq && \
@@ -27,12 +27,12 @@ WORKDIR /rails
 # Install correct bundler version
 RUN gem install bundler:2.5.23
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock ./ 
 RUN bundle install --jobs=4 --retry=3
 
 # Precompile assets
-COPY . .
-COPY package.json yarn.lock ./
+COPY . . 
+COPY package.json yarn.lock ./ 
 RUN bundle exec rails assets:precompile
 
 # Final stage for app image
