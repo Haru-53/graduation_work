@@ -1,90 +1,72 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
- header {
-  background-color: #e6d772;
-  padding: 10px 0;
-  border-bottom: 1px solid #ccc;
-
-  .header-container {
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-  }
-
-  .back-button, .home-button {
-    margin-right: 10px;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    text-decoration: none;
-    color: #333;
-  }
-}
-
-footer {
-  background-color: #e6d772;
-  color: #fff;
-  padding: 20px 0;
-  margin-top: 30px;
+.top-container {
   text-align: center;
-
-  .footer-container {
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .copyright {
-    margin-bottom: 10px;
-  }
-
-  .notice, .updates {
-    margin-bottom: 15px;
-  }
-
-  h3 {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  li {
-    margin-bottom: 5px;
-  }
-
-  a {
-    color: #fff;
-    text-decoration: none;
-  }
+  padding: 40px 20px;
+  background-color: #fdfdfd;
 }
 
-.simple-calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
+.top-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #333;
 }
 
-.day {
+.top-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* 4つのボタンを中央揃え・横一列に */
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* 画面が狭いときに折り返す */
+  gap: 20px;
+  margin: 20px 0;
+}
+
+/* ボタン全体に共通スタイル */
+.button-group a {
+  background-color: #e85ec5; /* 濃いピンク */
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.button-group a:hover {
+  background-color: #d94bb1; /* ホバー時は少し濃く */
+}
+
+.separator {
+  margin: 0 auto 30px auto;
+  width: 80%;
   border: 1px solid #ccc;
-  padding: 8px;
-  min-height: 80px;
+}
+
+.explanation-container {
+  padding: 30px;
+  background-color: #f9f9f9;
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+}
+
+/* ヘッダー */
+header {
+  background-color: #e6de9d; /* 黄色っぽい */
+  padding: 20px;
+  text-align: center;
+}
+
+/* フッター */
+footer {
+  background-color: #e6de9d;
+  text-align: center;
+  padding: 20px;
 }
