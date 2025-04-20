@@ -1,0 +1,34 @@
+ja:
+  devise:
+    sessions:
+      signed_in: 'ログインしました。'
+      signed_out: 'ログアウトしました。'
+      already_signed_out: 'すでにログアウトしています。'
+    registrations:
+      signed_up: 'アカウント登録が完了しました。'
+      updated: 'アカウント情報を変更しました。'
+      destroyed: 'アカウントを削除しました。'
+    passwords:
+      send_instructions: 'パスワード再設定の手順を送信しました。'
+      updated: 'パスワードを変更しました。'
+      no_token: 'このリンクは無効か、期限切れです。もう一度やり直してください。'
+    failure:
+      invalid: 'メールアドレスまたはパスワードが違います。'
+      not_found_in_database: 'メールアドレスまたはパスワードが違います。'
+      already_authenticated: 'すでにログインしています。'
+    mailer:
+      confirmation_instructions:
+        subject: 'アカウント確認手順'
+      reset_password_instructions:
+        subject: 'パスワード再設定手順'
+      unlock_instructions:
+        subject: 'アカウントのロック解除手順'
+    views:
+      sign_in: 'ログイン'
+      sign_out: 'ログアウト'
+      sign_up: '新規登録'
+      email: 'メールアドレス'
+      password: 'パスワード'
+      password_confirmation: 'パスワード確認'
+      remember_me: 'ログイン情報を保存する'
+      
