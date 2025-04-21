@@ -27,3 +27,9 @@
     <%= link_to '戻る', diary_entries_path, class: 'button secondary' %>
   </div>
 </div>
+
+<div class="diary-form-wrapper">
+  <%= form_with(model: @diary_entry, local: true) do |form| %>
+    <% if @diary_entry.errors.any? %>
+      <div class="error-messages">
+        <h3><%= pluralize(@diary_entry.errors.count, "件のエラー") %>があります:</h3>

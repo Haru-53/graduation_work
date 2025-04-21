@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # 固定ページ系
   root 'top#index'
   get '/explanation', to: 'static_pages#explanation', as: 'explanation'
-  get '/sample', to: 'static_pages#sample', as: 'sample'
+  get '/try_it', to: 'static_pages#sample', as: 'try_it'
 
   # 日記のメイン機能
   resources :diary_entries do
