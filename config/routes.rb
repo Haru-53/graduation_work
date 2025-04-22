@@ -5,11 +5,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  # devise_scope で /login や /signup のカスタムルートを設定
-  devise_scope :user do
-    get '/login', to: 'users/sessions#new', as: 'login'
-    get '/signup', to: 'users/registrations#new', as: 'signup'
-  end
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   # 固定ページ系
   root 'top#index'
